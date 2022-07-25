@@ -1,0 +1,11 @@
+{
+    "[php]":{
+    "editor.tabSize": 2
+    },
+    "[html]":{
+    "editor.tabSize": 2
+    },
+    "[javascriot]":{
+        "editor.tabSize": 2
+    }
+}
