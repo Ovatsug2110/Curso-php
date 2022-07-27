@@ -1,3 +1,14 @@
+<?php
+
+$contacts = [
+  ["name" => "Pepe", "phone_number" => "04124206393"],
+  ["name" => "Antonio", "phone_number" => "04124130903"],
+  ["name" => "Nate", "phone_number" => "04121334850"],
+  ["name" => "Jhon", "phone_number" => "04121334850"],
+  ["name" => "Ostin", "phone_number" => "04121334850"],
+  ]
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,17 +23,19 @@
         crossorigin="anonymous" 
         referrerpolicy="no-referrer" 
     />
+    
     <script
-    defer
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"
-  ></script>
+      defer
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous">
+    </script>
 
     <!--static content-->
     <link rel="stylesheet" href="./static/css/index.css">
     <title>Contacts App</title>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
@@ -39,7 +52,7 @@
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
@@ -53,41 +66,25 @@
           </div>
         </div>
       </nav>
+
       <main>
         <div class="container pt-4 p-3">
           <div class="row">
-            <div class="col-md-4 mb-3">
-              <div class="card text-center">
-                <div class="card body">
-                  <h3 class="card-tittle text-capitaliza">Contact Name 1</h3>
-                  <p class="m-2">987654321</p>
-                  <a href="#" class="bnt btn-secondary mb-2">Edit Contacts</a>
-                  <a href="#" class="bnt btn-danger mb-2">Delete Contacts  </a>
+            
+            <?php foreach ($contacts as $contact) : ?>
+              <div class="col-md-4 mb-3">
+                <div class="card text-center">
+                  <div class="card body">
+                    <h3 class="card-tittle text-capitaliza"><?= $contact["name"]?></h3>
+                    <p class="m-2"><?= $contact["phone_number"]?></p>
+                    <a href="#" class="bnt btn-secondary mb-2">Edit Contacts</a>
+                    <a href="#" class="bnt btn-danger mb-2">Delete Contacts  </a>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-4 mb-3">
-              <div class="card text-center">
-                <div class="card body">
-                  <h3 class="card-tittle text-capitaliza">Contact Name 2</h3>
-                  <p class="m-2">987654321</p>
-                  <a href="#" class="bnt btn-secondary mb-2">Edit Contacts</a>
-                  <a href="#" class="bnt btn-danger mb-2">Delete Contacts  </a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 mb-3">
-              <div class="card text-center">
-                <div class="card body">
-                  <h3 class="card-tittle text-capitaliza">Contact Name 3</h3>
-                  <p class="m-2">987654321</p>
-                  <a href="#" class="bnt btn-secondary mb-2">Edit Contacts</a>
-                  <a href="#" class="bnt btn-danger mb-2">Delete Contacts  </a>
-                </div>
-              </div>
-            </div>
+            <?php endforeach ?>
+
           </div>
-        
         </div>
       </main>
 </body>
