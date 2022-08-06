@@ -1,12 +1,6 @@
 <?php
-
-$contacts = [
-  ["name" => "Pepe", "phone_number" => "04124206393"],
-  ["name" => "Antonio", "phone_number" => "04124130903"],
-  ["name" => "Nate", "phone_number" => "04121334850"],
-  ["name" => "Jhon", "phone_number" => "04121334850"],
-  ["name" => "Ostin", "phone_number" => "04121334850"],
-  ]
+require "database.php";
+$contacts = $conn->query("SELECT * FROM contacts");
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +54,7 @@ $contacts = [
                 <a class="nav-link" href="/contacts-app/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/contacts-app/add.html">Add Contact</a>
+                <a class="nav-link" href="/contacts-app/add.php">Add Contact</a>
               </li>
             </ul>
           </div>
@@ -71,6 +65,15 @@ $contacts = [
         <div class="container pt-4 p-3">
           <div class="row">
             
+            <?php if ($contacts->rowCount() == 0): ?>
+              <div class="col-md-4 mx-auo">
+                <div class="card card-body text-center">
+                  <p>No contacts saved yet</p>
+                  <a href="/contacts-app/add.php">Add One!</a>
+                </div>
+              </div>
+              <?php endif ?>
+
             <?php foreach ($contacts as $contact) : ?>
               <div class="col-md-4 mb-3">
                 <div class="card text-center">
@@ -83,7 +86,6 @@ $contacts = [
                 </div>
               </div>
             <?php endforeach ?>
-
           </div>
         </div>
       </main>

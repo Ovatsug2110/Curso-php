@@ -1,3 +1,18 @@
+<?php
+  require "database.php";
+
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      $name = $_POST["name"];
+      $phoneNumber = $_POST["phone_number"];
+    
+      $statement = $conn->prepare("INSERT INTO contacts (name, phone_number) VALUES ('$name', '$phoneNumber')");
+      $statement->execute();
+
+      header("Location: index.php");
+    }
+?>
+</pre>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +39,7 @@
     <title>Contacts App</title>
 </head>
 <body>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand font-weight-bold" href="#">
@@ -47,12 +63,13 @@
                 <a class="nav-link" href="/contacts-app/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/contacts-app/add.html">Add Contact</a>
+                <a class="nav-link" href="/contacts-app/add.php">Add Contact</a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
+
       <main>
         <div class="container pt-5">
           <div class="row justity-content-center">
@@ -60,7 +77,8 @@
               <div class="card">
                 <div class="card-header">Add New Contact</div>
                 <div class="card-body">
-                  <form>
+                  
+                   <form method="POST" action="add.php">
                     <div class="mb-3 row">
                       <label for="name" class="col-md-4 col-form-label text-md-end">Name</label>
 
@@ -76,7 +94,7 @@
                       </div>
                     </div>
 
-                    div <div class="mb-3 row">
+                      <div class="mb-3 row">
                       <div class="col-md-6 offset-md-4">
                         <button type="submit" class="btn btn-primary">Submit</button>
                       </div>
@@ -88,5 +106,6 @@
           </div>
         </div>
       </main>
+      
 </body>
 </html>
