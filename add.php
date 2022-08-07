@@ -1,15 +1,26 @@
 <?php
+
   require "database.php";
+  
+  $error = null;
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST["name"]) || (empty($_POST["phone_number"]))) {
+      $error = "mamalo mamawebo.";
+    } else if (strlen($_POST["phone_number"]))  {
+      $error = "jodete cabron.";
+    } else {
       $name = $_POST["name"];
       $phoneNumber = $_POST["phone_number"];
     
-      $statement = $conn->prepare("INSERT INTO contacts (name, phone_number) VALUES ('$name', '$phoneNumber')");
+      $statement = $conn->prepare("INSERT INTO contacts (name, phone_number) VALUES (:name, :phoneNumber)");
+      $statement->bindParam(":name", $_POST["name"]);
+      $statement->bindParam(":phone_number", $_POST["phone_number"]);
       $statement->execute();
 
       header("Location: index.php");
     }
+  }
 ?>
 </pre>
 
@@ -77,20 +88,25 @@
               <div class="card">
                 <div class="card-header">Add New Contact</div>
                 <div class="card-body">
+                  <?php if ($error): ?>
+                    <p class="text-danger">
+                      <?= $error ?>
+                    </p>
+                  <?php endif ?>
                   
                    <form method="POST" action="add.php">
                     <div class="mb-3 row">
                       <label for="name" class="col-md-4 col-form-label text-md-end">Name</label>
 
                       <div class="col-md-6">
-                        <input type="text" name="name" id="name" class="form-control" required autocomplete="Name" autofocus>
+                        <input type="text" name="name" id="name" class="form-control" autocomplete="Name" autofocus>
                       </div>
                     </div>
                     <div class="mb-3 row">
                       <label for="Phone_number" class="col-md-4 col-form-label text-md-end">Phone Number</label>
 
                       <div class="col-md-6">
-                        <input type="tel" name="phone_number" id="phone_number" required autocomplete="phone number" autofocus>
+                        <input type="tel" name="phone_number" id="phone_number" autocomplete="phone number" autofocus>
                       </div>
                     </div>
 

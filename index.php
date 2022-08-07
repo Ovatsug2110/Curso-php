@@ -29,7 +29,6 @@ $contacts = $conn->query("SELECT * FROM contacts");
     <link rel="stylesheet" href="./static/css/index.css">
     <title>Contacts App</title>
 </head>
-
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
